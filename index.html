@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CID Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comfortaa', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e1e1e;
+      color: white;
+      padding: 1em 2em;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.2em;
+    }
+    header h1 a {
+      color: white;
+      text-decoration: none;
+    }
+    header button {
+      background: #f7931a;
+      color: white;
+      border: none;
+      padding: 0.7em 1.4em;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    main {
+      display: flex;
+      flex: 1;
+    }
+    #sidebar {
+      width: 220px;
+      background: #1e1e1e;
+      color: white;
+      padding: 2em 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+    }
+    #sidebar a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+    .content {
+      flex-grow: 1;
+      padding: 2em;
+    }
+    .card {
+      background: white;
+      padding: 2em;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      max-width: 500px;
+      margin: auto;
+    }
+    .card input.top-input {
+      min-width: 472px;
+      margin-bottom: 1em;
+      padding: 0.8em;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+    }
+    .card select,
+    .card button {
+      width: 100%;
+      margin-bottom: 1em;
+      padding: 0.8em;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: inherit;
+    }
+    .card button {
+      background: #f7931a;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .card button:hover {
+      background: #e67e00;
+    }
+    #clearLocalStorage {
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #status{
+      padding-bottom: 15px;
+    }  
+  </style>
+</head>
+<body lang="en">
+  <header>
+    <h1><a href="#" onclick="location.reload()">CID Chat</a></h1>
+    <button id="connectBtn">Connect Wallet</button>
+  </header>
+  <main>
+    <div id="sidebar">
+      <a href="#" onclick="renderSection('inbox')">Inbox</a>
+      <a href="#" onclick="renderSection('contacts')">Contacts</a>
+      <a href="#" onclick="renderSection('settings')">Settings</a>
+      <a href="#" onclick="renderSection('about')">About</a>
+    </div>
+    <div class="content">
+      <div class="card" id="cardContent">
+        <div id="status">Wallet not connected</div>
+        <input type="text" id="yourWallet" class="top-input" placeholder="Your Wallet Address" readonly>
+        <input type="text" id="recipient" class="top-input" placeholder="Recipient Wallet Address">
+        <input type="text" id="message" class="top-input" placeholder="Your Message">
+        <button id="sendBtn">Send Message</button>
+        <select id="networkSelect">
+          <option value="0x1">Ethereum Mainnet</option>
+          <option value="0x89">Polygon</option>
+          <option value="0xa">Optimism</option>
+          <option value="0xa4b1">Arbitrum One</option>
+        </select>
+        <div id="networkStatus"></div>
+        <button id="clearLocalStorage">🧹 Clear Local Storage</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html> 
