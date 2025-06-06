@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.12.1/dist/ethers.umd.min.js"></script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -144,5 +145,34 @@
       </div>
     </div>
   </main>
+<script>
+  const connectBtn = document.getElementById('connectBtn');
+  const statusDiv = document.getElementById('status');
+  const yourWalletInput = document.getElementById('yourWallet');
+
+  let signer; // نگهدارنده امضاکننده اتریوم
+
+  async function connectWallet() {
+    if (typeof window.ethereum === 'undefined') {
+      statusDiv.innerText = '❌ MetaMask نصب نشده است.';
+      return;
+    }
+
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      signer = await provider.getSigner();
+
+      const walletAddress = await signer.getAddress();
+      yourWalletInput.value = walletAddress;
+      statusDiv.innerText = `✅ Wallet connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
+    } catch (err) {
+      statusDiv.innerText = '❌ اتصال به کیف پول لغو شد یا خطا داشت.';
+      console.error(err);
+    }
+  }
+
+  connectBtn.addEventListener('click', connectWallet);
+</script>
 </body>
 </html> 
